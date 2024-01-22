@@ -1,18 +1,13 @@
-﻿using ToyStore_BL.Services;
-using ToyStore_BL.Interfaces;
-using ToyStore_Models.Models;
-using System;
+﻿using ToyStore_BL.Interfaces;
 
-public class IToyStoreService : ToyStore_BL.Interfaces.IToyStoreService
+namespace ToyStore_BL.Services;
+
+public class ToyStoreService : ToyStore_BL.Interfaces.IToyStoreService
 {
     private readonly IPlushToyService _plushToyService;
     private readonly IToyMakerService _toyMakerService;
 
-    public IToyStoreService(ToyService toyService)
-    {
-    }
-
-    public IToyStoreService(IToyMakerService toyMakerService, IPlushToyService plushToyService)
+    public ToyStoreService(IToyMakerService toyMakerService, IPlushToyService plushToyService)
     {
         _toyMakerService = toyMakerService;
         _plushToyService = plushToyService;

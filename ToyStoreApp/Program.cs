@@ -19,7 +19,7 @@ namespace ToyStoreApp
             builder.Services.AddSingleton<IPlushToyRepository, PlushToyRepository>();
             builder.Services.AddSingleton<IToyMakerService, ToyMakerService>();
             builder.Services.AddSingleton<IPlushToyService, PlushToyService>();
-            builder.Services.AddSingleton<IToyStoreService, IToyStoreService>();
+            builder.Services.AddSingleton<ToyStoreService, ToyStoreService>();
 
             builder.Services.AddControllers();
 
