@@ -26,5 +26,13 @@ namespace ToyStoreApp.Controllers
         {
             return _toyStoreService.CheckToyMakerCount(input);
         }
+
+        [HttpPost("TestEndPoint")]
+        public string TestEndPoint([FromBody]
+
+            GetAllPlushToysByToyMakerRequest request)
+        {
+            return "Ok";
+        }
     }
 }

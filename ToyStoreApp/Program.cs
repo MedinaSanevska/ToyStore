@@ -1,10 +1,13 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http; // Добавено това пространство от имена
+п»їusing Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http; // Г„Г®ГЎГ ГўГҐГ­Г® ГІГ®ГўГ  ГЇГ°Г®Г±ГІГ°Г Г­Г±ГІГўГ® Г®ГІ ГЁГ¬ГҐГ­Г 
 using Microsoft.Extensions.DependencyInjection;
 using ToyStore_BL.Interfaces;
 using ToyStore_BL.Services;
 using ToyStore_DL.Interfaces;
 using ToyStore_DL.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using ToyStore.HealthChecks;
 
 namespace ToyStoreApp
 {
@@ -19,13 +22,17 @@ namespace ToyStoreApp
             builder.Services.AddSingleton<IPlushToyRepository, PlushToyRepository>();
             builder.Services.AddSingleton<IToyMakerService, ToyMakerService>();
             builder.Services.AddSingleton<IPlushToyService, PlushToyService>();
-            builder.Services.AddSingleton<IToyStoreService, IToyStoreService>();
+            builder.Services.AddSingleton<ToyStoreService, ToyStoreService>();
 
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssemblyContaining(typeof(Program));
+            builder.Services.AddHealthChecks().AddCheck<KidsToyHealthCheck>(nameof(KidsToyHealthCheck));
 
             var app = builder.Build();
 
