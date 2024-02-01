@@ -3,7 +3,7 @@ using Moq;
 using ToyStore_DL.Interfaces;
 using ToyStore_BL.Services;
 using ToyStore_DL.Repositories;
-using ToyStore_BL.Services;
+
 
 namespace TestProject1
 {
@@ -73,5 +73,29 @@ namespace TestProject1
             Assert.Equal(expectedCount, result);
 
         }
+
+        [Fact]
+        public void CheckToyMakerCount_Negative()
+        {
+            //setup
+            var input = 10;
+            var expectedCount = 10;  // Променете стойността тук, например на 10, за да бъде тестът отрицателен
+
+            var mockedPlushToyRepository = new Mock<IPlushToyRepository>();
+            mockedPlushToyRepository.Setup(t => t.GetAllPlushToys()).Returns(PlushToyData);
+
+            //inject
+            var toyStoreService = new PlushToyService(mockedPlushToyRepository.Object);
+            var toyMakerService = new ToyMakerService(new ToyMakerRepository());
+            var service = new ToyStoreService(toyMakerService, toyStoreService);
+
+            //act
+            var result = service.CheckToyMakerCount(input);
+
+            //Assert
+            Assert.NotEqual(expectedCount, result);
+        }
+
+
     }
 }
