@@ -23,4 +23,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ToyStore_BL\ToyStore_BL.csproj" />
+    <ProjectReference Include="..\ToyStore_DL\ToyStore_DL.csproj" />
+    <ProjectReference Include="..\ToyStore_Models\ToyStore_Models.csproj" />
+  </ItemGroup>
+
 </Project>
